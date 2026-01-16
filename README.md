@@ -70,6 +70,7 @@ src/
     CanLogin.php        # Example trait for login logic
   Interfaces/
     Resettable.php      # Example interface for password reset
+tests/
 .gitignore              # Ignore dependencies, environment, system files
 composer.json           # Composer autoload configuration
 demo.php                # Demo script to showcase functionality
@@ -80,7 +81,7 @@ README.md               # This challenge description
 - `src/`: All PHP source code files, organized by feature.
 - `Traits/`: Place reusable traits (like `CanLogin`) here.
 - `Interfaces/`: Place interfaces (like `Resettable`) here.
-- `tests/`: Place demo scripts and unit/integration tests here.
+- `tests/`: Place unit/integration tests here.
 - `composer.json`: Autoloading and Composer package config.
 - `.gitignore`: Ignore Composer dependencies and project clutter.
 
