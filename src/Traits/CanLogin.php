@@ -7,8 +7,6 @@ namespace App\Traits;
  * This trait provides login/logout logic.
  * 
  */
-
-
  trait CanLogin
  {
     /**

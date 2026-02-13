@@ -4,7 +4,6 @@ namespace App\Users;
 
 class AdminUser extends UserBase 
 {
-    private const AccessLevel = 'ADMIN';
     
     public function __construct(string $name, string $email)
     {

@@ -2,11 +2,13 @@
 namespace App\Users;
 
 use App\Interfaces\Resettable;
+use App\Traits\CanLogin;
 
 
 
 class CustomerUser extends UserBase implements Resettable 
 {
+    use CanLogin;    
     private const AccessLevel = 'CUSTOMER';
     
     
