@@ -4,24 +4,25 @@ namespace App\Users;
 
 use App\Interfaces\Resettable;
 
-// Abstract base for all users.
-abstract class UserBase implements Resettable
+/**
+ * Abstract base for all users.
+ * Base class does NOT implement Resettable.
+ * Password reset capability is considered a specific behavior
+ * and is only implemented by CustomerUser.
+**/
+abstract class UserBase 
 {
-    protected $id;
     protected $name;
-    protected $email;
+    private $email;
+    protected $password;
 
 
-    public function __construct(string $id, string $name, string $email)
+    public function __construct(string $name, string $email)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->email = $email;
     }
 
-    public function getId(): string{
-        return $this->id;
-    }
 
     public function getName(): string{  
         return $this->name;
@@ -31,4 +32,5 @@ abstract class UserBase implements Resettable
     {
         return $this->email;
     }
+
 }
