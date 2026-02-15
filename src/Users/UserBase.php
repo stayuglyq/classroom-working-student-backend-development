@@ -16,6 +16,7 @@ abstract class UserBase
     protected $name;
     private $email;
     protected $password;
+    public string $role;
 
     //Roles
     public const ROLE_ADMIN = 'ADMIN';
@@ -24,12 +25,29 @@ abstract class UserBase
     protected static int $counter = 0;
 
 
-    public function __construct(string $name, string $email)
+    public function __construct(string $name, string $email, string $role)
     {
         $this->setName($name);
         $this->setEmail($email);
+        $this->role = $role;
 
         self::$counter++;
+    }
+
+    /**
+     * String representation of the user for display and logging.
+     * Structured as key=value pairs for easy parsing and log aggregation.
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return sprintf(
+            '[%s] name=%s email=%s role=%s',
+            (new \ReflectionClass($this))->getShortName(),
+            $this->getName(),
+            $this->getEmail(),
+            $this->role
+        );
     }
 
     /**
@@ -93,13 +111,30 @@ abstract class UserBase
 
     public function setEmail(string $email): void
     {
-        $this->email = $email;
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->email = $email;
+            return;
+        }
+        throw new InvalidArgumentException("Invalid email adress.");
     }
+
 
     public function getCounter(): int
     {
         return self::$counter;
     }
 
-
+    /**
+     * User data as associative array (key => value).
+     * Appropriate for serialization, API responses, or keyed access by field name.
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'name'  => $this->name,
+            'email' => $this->getEmail(),
+            'role'  => $this->role,
+        ];
+    }
 }
